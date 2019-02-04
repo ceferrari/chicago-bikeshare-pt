@@ -41,8 +41,8 @@ input("Aperte Enter para continuar...")
 # TAREFA 2
 # TODO: Imprima o `gênero` das primeiras 20 linhas
 print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
-for i in range(20):
-    print(data_list[i][6])
+for index in range(20):
+    print(data_list[index][6])
 
 # Ótimo! Nós podemos pegar as linhas(samples) iterando com um for, e as colunas(features) por índices.
 # Mas ainda é difícil pegar uma coluna em uma lista. Exemplo: Lista com todos os gêneros
@@ -173,19 +173,22 @@ def count_user_types(data_list):
     Argumentos:
         data_list: A lista onde os tipos de usuários serão contados.
     Retorna:
-        Uma lista de duas posições, onde a primeira se refere à contagem de "Subscriber", e a segunda à contagem de "Customer".
+        Uma lista de três posições, onde a primeira se refere à contagem de "Subscriber", a segunda à contagem de "Customer" e a terceira à contagem de "Dependent".
     """
     count_subscriber = 0
     count_customer = 0
+    count_dependent = 0
     for data in data_list:
         if (data[5] == "Subscriber"):
             count_subscriber += 1
         elif (data[5] == "Customer"):
             count_customer += 1
-    return [count_subscriber, count_customer]
+        elif (data[5] == "Dependent"):
+            count_dependent += 1
+    return [count_subscriber, count_customer, count_dependent]
 
 user_types_list = column_to_list(data_list, -3)
-types = ["Subscriber", "Customer"]
+types = ["Subscriber", "Customer", "Dependent"]
 quantity = count_user_types(data_list)
 y_pos = list(range(len(types)))
 plt.bar(y_pos, quantity)
@@ -300,8 +303,8 @@ def count_items(column_list):
     count_items = []
     for column in column_list:
         if (column in item_types):
-            i = item_types.index(column)
-            count_items[i] += 1
+            index = item_types.index(column)
+            count_items[index] += 1
         else:
             item_types.append(column)
             count_items.append(1)
